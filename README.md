@@ -1,3 +1,36 @@
+repeat wait() until game.Players
+repeat wait() until game.Players.LocalPlayer
+repeat wait() until game.ReplicatedStorage
+repeat wait() until game.ReplicatedStorage:FindFirstChild("Remotes");
+repeat wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui");
+repeat wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
+repeat wait() until game:GetService("Players")
+repeat wait() until game:GetService("Players").LocalPlayer.Character:FindFirstChild("Energy")
+
+wait(1)
+
+if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
+
+if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+	repeat wait()
+		if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
+			if _G.Team == "Pirate" then
+				for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
+					v.Function()
+				end
+			elseif _G.Team == "Marine" then
+				for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
+					v.Function()
+				end
+			else
+				for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
+					v.Function()
+				end
+			end
+		end
+	until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+end
+
 _G.Settings = {
     Auto_Farm_Level = false;
 	Auto_New_World = false;
@@ -117,7 +150,7 @@ _G.Settings = {
 	Auto_Store_Fruit = false;
 }
 
-local foldername = "CX HUB V2"
+local foldername = "RIPPER HUB V2"
 local filename = "BloxFruit "..game.Players.LocalPlayer.Name.." Config.json"
  
 function saveSettings()
@@ -1550,9 +1583,9 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/hajib
 local Wait = library.subs.Wait
 
 local PepsisWorld = library:CreateWindow({
-    Name = "chicken HUB V1",
+    Name = "chicken Hub",
     Themeable = {
-    Info = "Discord Server: vERu37nMKu"
+    Info = "Discord Server: "
     }
 })
 
@@ -7576,6 +7609,13 @@ FightingStyleShopSection:AddButton({
     Name = "Buy Dragon Talon",
     Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
+    end
+})
+
+FightingStyleShopSection:AddButton({
+    Name = "Buy God Human",
+    Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
     end
 })
 
